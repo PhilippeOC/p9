@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% block content %}
+    {% if form.errors %}
+    
+        <P> Saisissez un nom d’utilisateur et un mot de passe valides,
+        <a href = "http://127.0.0.1:8000/accounts/login/"> cliquer ici</a> </P>
+    {% else %}
+        <form method='POST' action="{% url 'login' %}">
+            {% csrf_token %}
+            <p>Nom d'utilisateur: {{form.username}}</p>
+            <p>Mot de passe: {{form.password}}</p>
+            <p><input type="submit"  value='Se connecter'> </p>
+        </form>
+    {% endif %}
+{% endblock %}
