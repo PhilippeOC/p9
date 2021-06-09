@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="text-center">
+    <h1 class="pt-3">Bienvenue sur LITReview !</h1>
+    <hr>
+ </div>
+    <div class = "container pt-5">
+        <div class="row justify-content-around align-items-start">
+            <div class="col-4 border border-3">
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-2 text-center">Inscrivez-vous maintenant</legend>
+                </fieldset>
+                <div class="form-group text-center pt-3 pb-2">
+                    <a  class="btn btn-info" href="{% url 'register'%}"> S'inscrire</a>
+                </div>
+            </div>
+            <div class="col-4 border border-3">
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4 text-center">Connectez-vous</legend>
+                        {{form|crispy}}
+                    </fieldset>
+                    <div class="form-group text-center pt-3 pb-2">
+                        <button class="btn btn-info" type = "submit">Se connecter</button>
+                    </div>
+                </form>
+                
+            </div>
+           
+        </div>
+    </div>
+    
+{% endblock %}

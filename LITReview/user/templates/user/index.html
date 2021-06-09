@@ -1,9 +1,0 @@
-{% extends 'main.html' %}
-{% block content %}
-    <h2>page index</h2>
-    {% if user.is_authenticated %}
-        <p>Bonjour {{user.username}}</p>
-    {% else %}
-        <p>No connect</p>
-    {%endif %}
-{% endblock %}

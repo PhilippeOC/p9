@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block addcss %}
+    <link rel="stylesheet" href="{% static 'user/css/style_user.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h2>Bienvenue sur LITReview</h2>
+         
+        <a href="{% url 'register' %}">inscription</a>
+        <a href="{% url 'login' %}">connection</a>
+    
+{% endblock %}
