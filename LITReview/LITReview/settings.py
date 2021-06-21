@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user',
+    'ticket',
+    
     'crispy_forms',
 ]
 
@@ -110,11 +112,15 @@ LANGUAGE_CODE = 'fr'
 
 TIME_ZONE = 'Europe/Paris'
 
+
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
+
+
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -132,7 +138,11 @@ AUTH_USER_MODEL = 'user.User'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'profile_user'
-# LOGOUT_REDIRECT_URL = 'home'
-
+LOGIN_URL = 'login'
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+

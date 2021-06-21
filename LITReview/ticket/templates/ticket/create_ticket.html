@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+ <!-- Affichage du formulaire pour créer ou modifier un ticket -->
+<div class="text-center">
+    {% if form.instance.id %}
+        <h2 class="pt-3">Modifier un ticket</h2>
+    {% else %}
+        <h2 class="pt-3">Créer un ticket</h2>
+    {% endif %}
+    
+    <hr>
+ </div>
+ 
+    <div class = "container pt-5">
+        <div class="row justify-content-around align-items-start">
+            <div class="col-8 border border-3">
+                {% if form.instance.id %}
+                    <form enctype="multipart/form-data" method="POST" action="{% url 'add_ticket' id_ticket=form.instance.id %}">
+                {% else %}
+                    <form enctype="multipart/form-data" method="POST" action="{% url 'add_ticket' %}">
+                {% endif %} 
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <div class="d-flex justify-content-end" >
+                            <button class="btn btn-outline-dark my-1 mt-2" type = "submit">Envoyer</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

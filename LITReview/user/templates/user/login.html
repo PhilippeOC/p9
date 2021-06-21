@@ -1,8 +1,11 @@
 {% extends 'main.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
+
 <div class="text-center">
-    <h1 class="pt-3">Bienvenue sur LITReview !</h1>
+    
+    <h1 class="pt-3"> <img src="{% static 'images/logo.png'%}" height="50" width = "40" class="ms-5"/> &nbsp;  Bienvenue sur LITReview !</h1>
     <hr>
  </div>
     <div class = "container pt-5">
@@ -12,7 +15,7 @@
                     <legend class="border-bottom mb-2 text-center">Inscrivez-vous maintenant</legend>
                 </fieldset>
                 <div class="form-group text-center pt-3 pb-2">
-                    <a  class="btn btn-info" href="{% url 'register'%}"> S'inscrire</a>
+                    <a  class="btn btn-outline-dark" href="{% url 'register'%}"> S'inscrire</a>
                 </div>
             </div>
             <div class="col-4 border border-3">
@@ -23,7 +26,7 @@
                         {{form|crispy}}
                     </fieldset>
                     <div class="form-group text-center pt-3 pb-2">
-                        <button class="btn btn-info" type = "submit">Se connecter</button>
+                        <button class="btn btn-outline-dark" type = "submit">Se connecter</button>
                     </div>
                 </form>
                 

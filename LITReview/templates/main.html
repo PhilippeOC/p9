@@ -5,15 +5,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
     <link rel="stylesheet" type ="text/css" href="{% static 'css/style_main.css' %}"> 
     {% block addcss %} {% endblock %}
     {% if title %}
         <title>LITReview - {{title}}</title>
-    {%else%}
+    {% else %}
         <title>LITReview</title>
     {% endif %}
 </head>
 <body>
+    {% if user.is_authenticated%}
+        {% include 'navbar.html' %}
+        <span class="float-end pe-5">{{ user.username }}</span>
+    
+    {% endif %}
+
     <div class= "container">
         {% if messages %}
             {% for message in messages %}
