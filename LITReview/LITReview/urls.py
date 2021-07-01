@@ -22,9 +22,13 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('user.urls')),
-    # path('accounts/', include('django.contrib.auth.urls')),
 
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name="login"),
-    path('profil_user/logout/', auth_views.LogoutView.as_view(template_name='user/logout.html'), name="logout"),
+    path('logout/', auth_views.LogoutView.as_view(template_name='user/logout.html'), name="logout"),
     path('add_ticket/', include('ticket.urls')),
+    path('add_review/', include('review.urls')),
+
+    path('userfollows/', include('userfollows.urls')),
+    path('flux/', include('flux.urls')),
+    path('post/', include('post.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

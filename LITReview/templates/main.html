@@ -15,11 +15,14 @@
     {% endif %}
 </head>
 <body>
-    {% if user.is_authenticated%}
-        {% include 'navbar.html' %}
-        <span class="float-end pe-5">{{ user.username }}</span>
     
+    {% if user.is_authenticated%}
+        {% include 'bases/navbar.html' %}
+        <div class="row justify-content-end">
+            <span class="d-flex justify-content-end me-5">{{ user.username }}</span>
+        </div>
     {% endif %}
+    
 
     <div class= "container">
         {% if messages %}

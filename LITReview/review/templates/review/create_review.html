@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+ <!-- Affichage du formulaire pour créer ou modifier une critique sans répondre à un ticket -->
+<div class="text-center">
+        <h2 class="pt-3">Créer une critique</h2>
+    <hr>
+ </div>
+    <div class = "container py-2">
+        <div class="row justify-content-around align-items-start">
+            <div class="col-8 border border-3">
+                {% if form.instance.id %}
+                    <form enctype="multipart/form-data" method="POST" action="{% url 'add_review' id_review=form.instance.id %}">
+                {% else %}
+                    <form enctype="multipart/form-data" method="POST" action="{% url 'add_review' %}">
+                {% endif %} 
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <p class='mt-1'>Livre/Article</p>
+                            {{ form.title|as_crispy_field }}
+                            {{ form.description|as_crispy_field }}
+                            {{ form.image|as_crispy_field }}
+                        </div>
+                        <div class="form-row">
+                            <hr>
+                            <p class='mt-1'>Critique</p>
+                            {{ form.headline|as_crispy_field }}
+                            
+                            {{ form.rating.label }}<br/>
+                            {% for radio in form.rating %}
+                                <div class="form-check form-check-inline ms-2 mt-1">
+                                    {{ radio }}
+                                </div>
+                            {% endfor %}
+                            {{ form.body|as_crispy_field }}
+                        </div>
+                    
+                        <div class="d-flex justify-content-end" >
+                            <button class="btn btn-outline-dark my-1 mt-2" type = "submit">Envoyer</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div> 
+
+{% endblock %}

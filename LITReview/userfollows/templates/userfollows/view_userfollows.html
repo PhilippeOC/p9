@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="row justify-content-center pt-4">
+    <div class="col-6 border border-4">
+        <table class="table">
+            <thead>
+                <th class='text-center'> Utilisateurs inscrits</th>
+            </thead>
+            <tbody>
+            
+            {% for user in users %}
+            <tr class="table-bordered border-2">
+                <td>{{user}}</td> 
+            </tr> 
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

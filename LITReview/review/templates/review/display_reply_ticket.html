@@ -1,0 +1,31 @@
+{% load tz %}
+
+    <div class="row justify-content-center pt-1">
+        <div class="col-10 border border-4 mb-2">
+            <div class="row">
+                {% if user.is_authenticated and user == ticket.author %}
+                    <p><span class="float-start  ps-2 pt-1"> Ticket : Vous </span>
+                    <span class="float-end pe-2 pt-1"> 
+                        {{ticket.time_created|localtime | time:'H:i'}}, {{ticket.time_created|localtime | date:'d F Y'}}
+                    </span></p>
+                {% else %}
+                    <p><span class="float-start ps-2 pt-1"> {{ticket.author}} a demandé une critique </span>
+                    <span class="float-end pe-2 pt-1"> 
+                            {{ticket.time_created|localtime | time:'H:i'}}, {{ticket.time_created|localtime | date:'d F Y'}}
+                    </span></p>
+                {% endif %}
+            </div>
+            <div class="row">
+                <h4 class="ms-2">{{ticket.title}}</h4>
+                <p class="ms-2 py-1">{{ticket.description}}</p>
+            </div>
+            <div class="row ">
+                {% if ticket.image %} 
+                    <div class="col-2">
+                        <img src={{ticket.image.url}} alt="image du ticket" class="img-fluid mb-2"/>
+                    </div>
+                {% endif %} 
+            </div>
+            
+        </div>
+    </div>

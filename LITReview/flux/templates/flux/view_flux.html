@@ -1,0 +1,28 @@
+
+{% extends "main.html" %}
+{% load static%}
+{% block content%}
+    
+        <div class="row justify-content-center pt-5">
+                <div class="col-6 border border-4 ">
+                        <div class="d-flex btn-group" >
+                                <a class="btn btn-outline-dark me-3 my-1 w-50" href="{% url 'add_ticket'%}">Demander une critique</a>
+                                <a class="btn btn-outline-dark ms-3 my-1 w-50" href="{% url 'add_review'%}">Créer une critique</a> 
+                        </div>
+                </div>
+        </div>
+
+       
+
+
+        {% for post in posts %}
+                {% if post.content_type == 'TICKET' %}
+                        {% include 'bases/ticket_snippet.html' with ticket=post %}
+                {% elif post.content_type == 'REVIEW' %}
+                        {% include 'bases/review_snippet.html' with review=post %}
+                {% endif %}
+        {% endfor %}
+
+{% endblock %}
+
+

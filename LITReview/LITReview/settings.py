@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'ticket',
-    
+    'review',
+    'userfollows',
+    'flux',
+    'post',
     'crispy_forms',
 ]
 
@@ -137,7 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user.User'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'profile_user'
+LOGIN_REDIRECT_URL = 'flux'
 LOGIN_URL = 'login'
 
 STATICFILES_DIRS = [BASE_DIR / "static"]

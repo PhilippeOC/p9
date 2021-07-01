@@ -1,7 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-# from django.contrib.auth.forms import UserCreationForm
-# from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
 from .forms import CreateUserForm
@@ -9,7 +6,7 @@ from .forms import CreateUserForm
 
 def home(request):
     if request.user.is_authenticated:
-        return redirect('profile_user')
+        return redirect('/flux/')
     return redirect('login/')
 
 
@@ -25,9 +22,3 @@ def register(request):
         form = CreateUserForm()
     context = {'form': form, 'title': 'Inscription'}
     return render(request, 'user/register.html', context)
-
-
-@login_required
-def profile_user(request):
-    context = {'title': 'Profil'}
-    return render(request, 'user/profile_user.html', context)
