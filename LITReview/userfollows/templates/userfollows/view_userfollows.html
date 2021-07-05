@@ -1,7 +1,52 @@
 {% extends 'main.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-
+<div class="text-center">
+    <h2 class="pt-3">Suivre d'autres utilisateurs</h2>
+</div>
+<div class="row justify-content-center pt-4">
+    <div class="col-6 border border-4">
+        <form method='POST'>
+            {% csrf_token %}
+            {{form}}
+            <input type='submit' value='Envoyer' class="btn btn-outline-dark my-1" >
+        </form>
+    </div>
+</div>
+<div class="row justify-content-center pt-4">
+    <div class="col-6 border border-4">
+        <table class="table">
+            <thead>
+                <th class='text-center'> Abonnements</th>
+            </thead>
+            <tbody>
+            
+            {% for user_following  in users_following  %}
+            <tr class="table-bordered border-2">
+                <td>{{user_following }} <a href="{% url 'userfollows' id_follow=user_following.id %}" class="d-flex justify-content-end">Désabonner</a></td> 
+            </tr> 
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row justify-content-center pt-4">
+    <div class="col-6 border border-4">
+        <table class="table">
+            <thead>
+                <th class='text-center'> Abonnés</th>
+            </thead>
+            <tbody>
+            
+            {% for followed_user  in followed_users  %}
+            <tr class="table-bordered border-2">
+                <td>{{followed_user }}</td> 
+            </tr> 
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
 <div class="row justify-content-center pt-4">
     <div class="col-6 border border-4">
         <table class="table">

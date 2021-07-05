@@ -7,6 +7,7 @@ from ticket.models import Ticket
 
 User = get_user_model()
 
+
 class Review(models.Model):
     ticket = models.ForeignKey(Ticket, null=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=128)

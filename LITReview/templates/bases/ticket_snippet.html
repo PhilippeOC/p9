@@ -35,9 +35,11 @@
                         <a class="btn btn-outline-dark my-1" href="{% url 'delete_ticket' id_ticket=ticket.id %}">Supprimer</a>
                     </div>
                 {% else %}
-                    <div class="d-flex justify-content-end" >
-                        <a class="btn btn-outline-dark me-1 my-1" href="{% url 'review_with_ticket' id_ticket=ticket.id %}">Créer une critique</a>
-                    </div>
+                    {% if not ticket.has_review %}
+                        <div class="d-flex justify-content-end" >
+                            <a class="btn btn-outline-dark me-1 my-1" href="{% url 'review_with_ticket' id_ticket=ticket.id %}">Créer une critique</a>
+                        </div>
+                    {% endif %}
                 {% endif %}
                 
             </div>
