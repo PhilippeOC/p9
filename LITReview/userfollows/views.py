@@ -10,6 +10,8 @@ User = get_user_model()
 
 @login_required
 def display_users(request):
+    """ envoie au template view_usersfollows.html les utilisateurs suivis, les utilisateurs suiveurs
+    et tous les utilisateurs inscrits """
 
     form = create_followers(request)
 
@@ -31,8 +33,8 @@ def display_users(request):
     return render(request, 'userfollows/view_userfollows.html', context)
 
 
-@login_required
 def create_followers(request):
+    """ gestion du formulaire d'abonnement à un fil d'un utilisateur """
     if request.method == "POST":
         form = CreateFollowerForm(user=request.user, data=request.POST)
         if form.is_valid():
@@ -45,5 +47,6 @@ def create_followers(request):
 
 @login_required
 def delete_follower(request, id_follow=None):
+    """ supprime un abonnement à un fil d'un utilisateur """
     UserFollows.objects.filter(followed_user_id=id_follow, user_id=request.user.id).delete()
-    return redirect('/flux/')
+    return redirect('/userfollows/')

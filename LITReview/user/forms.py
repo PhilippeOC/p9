@@ -7,6 +7,7 @@ User = get_user_model()
 
 
 class CreateUserForm(auth_form.UserCreationForm):
+    """ formulaire d'inscription """
     class Meta(auth_form.UserCreationForm.Meta):
         model = User
         fields = ['username', 'password1', 'password2']

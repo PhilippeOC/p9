@@ -8,6 +8,3 @@ urlpatterns = [
     # path('view_ticket', views.display_tickets, name='view_ticket'),
     path('delete_ticket/<int:id_ticket>', views.delete_ticket, name='delete_ticket'),
 ]
- 
-
-  

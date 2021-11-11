@@ -5,12 +5,14 @@ from .forms import CreateUserForm
 
 
 def home(request):
+    """ redirige un utilisateur connecté vers son flux et un utilisteur non connecté vers la page de login"""
     if request.user.is_authenticated:
         return redirect('/flux/')
     return redirect('login/')
 
 
 def register(request):
+    """ gestion du formulaire d'inscription """
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():

@@ -14,6 +14,7 @@ User = get_user_model()
 
 @login_required
 def display_flux(request):
+    """ envoie le flux de données (tikect et review) d'un utilisateur vers le template view_flux.html """
     reviews = get_users_viewable_reviews(request.user)
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
 
@@ -26,7 +27,7 @@ def display_flux(request):
         reverse=True
     )
 
-    return render(request, 'flux/view_flux.html', context={'posts': posts})
+    return render(request, 'flux/view_flux.html', context={'posts': posts, 'title': 'Flux'})
 
 
 def get_users_viewable_reviews(request):

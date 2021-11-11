@@ -21,5 +21,3 @@ def display_posts(request):
     )
     context = {'posts': posts, 'title': 'Posts'}
     return render(request, 'post/view_post.html', context)
-
-    

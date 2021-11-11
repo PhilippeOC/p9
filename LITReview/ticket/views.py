@@ -38,4 +38,4 @@ def delete_ticket(request, id_ticket):
     """ supprime un ticket """
     ticket = get_object_or_404(Ticket, pk=id_ticket)
     ticket.delete()
-    return redirect('view_ticket')
+    return redirect('/flux/')

@@ -1,14 +1,14 @@
 {% extends 'main.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-   
+<!-- affiche le formulaire d'inscription-->
 <div class = "container pt-5">
     <div class="row justify-content-around align-items-start">
         <div class="col-5 border border-3">
             <form method="POST" action="{% url 'register' %}">
                 {% csrf_token %}
                 <fieldset class="form-group">
-                    <legend class="border-bottom mb-4 text-center">Connectez-vous</legend>
+                    <legend class="border-bottom mb-4 text-center">Inscrivez-vous</legend>
                     {{form|crispy}}
                 </fieldset>
                 <div class="form-group text-center pt-3 pb-2">

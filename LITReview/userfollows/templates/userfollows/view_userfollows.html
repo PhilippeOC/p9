@@ -1,15 +1,18 @@
 {% extends 'main.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+<!-- affichage des utilisateurs inscrits sur le site, des utilisateurs suivis et des utilisateurs suiveurs-->
 <div class="text-center">
     <h2 class="pt-3">Suivre d'autres utilisateurs</h2>
 </div>
 <div class="row justify-content-center pt-4">
-    <div class="col-6 border border-4">
-        <form method='POST'>
+    <div class="col-6 border border-4 ">
+        <form method='POST' class='my-2'>
             {% csrf_token %}
-            {{form}}
-            <input type='submit' value='Envoyer' class="btn btn-outline-dark my-1" >
+            <table>
+                {{form}}
+                <input type='submit' value='Envoyer' class="btn btn-outline-dark float-end mb-2 " >
+            </table>
         </form>
     </div>
 </div>
@@ -23,7 +26,7 @@
             
             {% for user_following  in users_following  %}
             <tr class="table-bordered border-2">
-                <td>{{user_following }} <a href="{% url 'userfollows' id_follow=user_following.id %}" class="d-flex justify-content-end">Désabonner</a></td> 
+                <td>{{user_following }} <a href="{% url 'userfollows_delete' id_follow=user_following.id %}" class="float-end">Désabonner</a></td> 
             </tr> 
             {%endfor%}
             </tbody>

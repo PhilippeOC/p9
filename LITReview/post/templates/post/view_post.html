@@ -2,13 +2,18 @@
 {% load static%}
 
 {% block content%}
-
-{% for post in posts %}
-    {% if post.content_type == 'TICKET' %}
-        {% include 'bases/ticket_snippet.html' with ticket=post %}
-    {% elif post.content_type == 'REVIEW' %}
-        {% include 'bases/review_snippet.html' with review=post %}
-    {% endif %}
-{% endfor %}
-
+    <div class="text-center">
+            <h2 class="pt-3">Vos posts</h2>
+    </div>
+    {% if posts%}
+        {% for post in posts %}
+            {% if post.content_type == 'TICKET' %}
+                {% include 'bases/ticket_snippet.html' with ticket=post %}
+            {% elif post.content_type == 'REVIEW' %}
+                {% include 'bases/review_snippet.html' with review=post %}
+            {% endif %}
+        {% endfor %}
+    {%else%}
+        <p class="text-center mt-5">Vous n'avez pas encore posté.</p>
+    {%endif%}
 {% endblock%}
