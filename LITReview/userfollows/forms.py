@@ -15,7 +15,7 @@ class CreateFollowerForm(forms.ModelForm):
         labels = {'user_to_follow': "Nom d'utilisateur"}
 
     def __init__(self, user, *args, **kwargs):
-        """ recupere l'utilisateur"""
+        """ recupère l'utilisateur connecté"""
         self.user = user
         super().__init__(*args, **kwargs)
 

@@ -13,7 +13,7 @@
 - sous Windows: `<environment_name>\Scripts\Activate.ps1`
 - sous Linux: `source <environment_name>/bin/activate`
 
-4. Télecharger (puis décompresser) le dossier `LITReview` et le fichier `requierements.txt` depuis le repository github
+4. Télecharger (puis décompresser) l'application depuis le repository github
 
 5. Installer la liste des paquets Python nécessaires dans cet environnement avec la commande:
 - sous Windows: `pip install -r requirements.txt`
