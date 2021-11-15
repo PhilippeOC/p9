@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
+from django.db.models.functions import Lower
 
 from userfollows.models import UserFollows
 from userfollows.forms import CreateFollowerForm
@@ -23,7 +24,7 @@ def display_users(request):
     for followed_user in request.user.followed_by.all():
         followed_users.append(User.objects.get(pk=followed_user.user_id))
 
-    users = User.objects.all()
+    users = User.objects.order_by(Lower('username'))
 
     context = {'users': users,
                'form': form,

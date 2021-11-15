@@ -21,7 +21,7 @@
 
 
 # Exécution
-1. Pour lancer le programme taper la commande: 
+1. Pour lancer le programme, dans le dossier `LITReview` (contenant `manage.py`), taper la commande: 
 - sous Windows: `python manage.py runserver`
 - sous Linux: `python3 manage.py runserver`
 

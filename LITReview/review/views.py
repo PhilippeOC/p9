@@ -10,23 +10,32 @@ User = get_user_model()
 
 
 @login_required
-def create_review(request, id_review: int):
-    """ creation d'une critique sans répondre à un ticket """
-    instance_review = get_object_or_404(Review, pk=id_review)
+def create_review(request, id_review: int = None):
+    """ creation ou modification d'une critique sans répondre à un ticket """
+    instance_review = get_object_or_404(Review, pk=id_review) if id_review else None
 
     if request.method == 'POST':
-        form = CreateReviewForm(request.POST, request.FILES)
+        form = CreateReviewForm(request.POST, request.FILES, instance=instance_review)
         if form.is_valid():
             instance_review = form.save(commit=False)
             instance_review.user = request.user
-            instance_review.ticket = Ticket.objects.create(title=form.cleaned_data.get('title'),
-                                                           description=form.cleaned_data.get('description'),
-                                                           author=request.user,
-                                                           image=form.cleaned_data.get('image'))
+            if id_review is None:
+                instance_review.ticket = Ticket.objects.create(title=form.cleaned_data.get('title'),
+                                                               description=form.cleaned_data.get('description'),
+                                                               author=request.user,
+                                                               image=form.cleaned_data.get('image'))
+
+            else:
+                Ticket.objects.filter(pk=instance_review.ticket.pk).update(title=form.cleaned_data.get('title'),
+                                                                           description=form.cleaned_data
+                                                                                           .get('description'),
+                                                                           author=request.user,
+                                                                           image=form.cleaned_data.get('image'))
+
             instance_review = form.save()
             return redirect('/flux/')
     else:
-        form = CreateReviewForm(instance=instance_review)
+        form = CreateReviewForm()
     context = {'form': form, 'title': 'Créer une critique'}
     return render(request, 'review/create_review.html', context)
 
@@ -58,8 +67,8 @@ def change_review(request, id_review: int):
     instance_review = get_object_or_404(Review, pk=id_review)
     instance_ticket = Ticket.objects.get(review__pk=id_review)
 
-    if instance_review.user == User.objects.get(ticket__author_id=instance_ticket.author_id):
-        form = change_create_review(request, instance_review)
+    if instance_review.user == User.objects.get(pk=instance_ticket.author_id):
+        form = CreateReviewForm(instance=instance_review)
         context = {'form': form, 'title': 'Modifier une critique'}
         return render(request, 'review/create_review.html', context)
     else:
@@ -79,25 +88,6 @@ def change_review(request, id_review: int):
         form = CreateReviewTicketForm(instance=instance_review)
         context = {'form': form, 'title': 'modifier une critique', 'ticket': instance_ticket}
         return render(request, 'review/create_review_ticket.html', context)
-
-
-def change_create_review(request, instance_review):
-    """ modification d'une critique publiée sans répondre à un ticket"""
-    if request.method == 'POST':
-        form = CreateReviewForm(request.POST, request.FILES, instance=instance_review)
-        if form.is_valid():
-            instance_review = form.save(commit=False)
-            instance_review.user = request.user
-        else:
-            Ticket.objects.filter(pk=instance_review.ticket.pk).update(title=form.cleaned_data.get('title'),
-                                                                       description=form.cleaned_data.get('description'),
-                                                                       author=request.user,
-                                                                       image=form.cleaned_data.get('image'))
-            instance_review = form.save()
-        return redirect('/flux/')
-    else:
-        form = CreateReviewForm(instance=instance_review)
-    return form
 
 
 @login_required
