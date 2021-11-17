@@ -26,16 +26,22 @@ def create_review(request, id_review: int = None):
                                                                image=form.cleaned_data.get('image'))
 
             else:
+                img_path = str(form.cleaned_data.get('image'))
+                if form.cleaned_data.get('image'):
+                    if img_path.count('images/') == 0:
+                        img_path = 'images/' + img_path
+                else:
+                    img_path = None
                 Ticket.objects.filter(pk=instance_review.ticket.pk).update(title=form.cleaned_data.get('title'),
                                                                            description=form.cleaned_data
                                                                                            .get('description'),
                                                                            author=request.user,
-                                                                           image=form.cleaned_data.get('image'))
+                                                                           image=img_path)
 
             instance_review = form.save()
             return redirect('/flux/')
     else:
-        form = CreateReviewForm()
+        form = CreateReviewForm(instance=instance_review)
     context = {'form': form, 'title': 'Créer une critique'}
     return render(request, 'review/create_review.html', context)
 
